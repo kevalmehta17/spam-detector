@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from joblib import load
 
 app = Flask(__name__)
+CORS(app)
 
 # Load the model from the pickle file
 
@@ -12,12 +14,15 @@ vectorizer = load('../models/vectorizer.joblib')
 
 def predict():
     data = request.json
-    message = data.get("message","")
+    message = data.get("text","")
+
+    if not message:
+        return jsonify({"error":"No message Provided"}), 400
 
     message_tfidf = vectorizer.transform([message])
     prediction = model.predict(message_tfidf)[0]
 
-    return jsonify({"predicition":"spam" if prediction == 1 else "Not-Spam"})
+    return jsonify({"prediction":"spam" if prediction == 1 else "Not-Spam"})
 
 
 if __name__ == '__main__':
