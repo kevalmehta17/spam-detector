@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 # Load the model from the pickle file
 
-model = load('../model/spam_classifier.joblib')
-vectorizer = load('../model/vectorizer.joblib')
+model = load('../models/spam_classifier.joblib')
+vectorizer = load('../models/vectorizer.joblib')
 
 @app.route('/predict',methods=["POST"])
 
