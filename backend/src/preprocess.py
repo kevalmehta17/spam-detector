@@ -1,7 +1,5 @@
 import pandas as pd
 
-# Preprocessing File help to load and clean the dataset which is cruicial for the model training
-
 def load_and_clean_data(file_path):
     # Load the dataset
     df = pd.read_csv(file_path,encoding="latin-1")
